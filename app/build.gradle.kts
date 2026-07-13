@@ -48,6 +48,12 @@ android {
                 "proguard-rules.pro"
             )
         }
+
+        debug {
+            isShrinkResources = false
+            isMinifyEnabled = false
+            signingConfig = signingConfigs.getByName("debug")
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -68,8 +74,11 @@ android {
     }
 
     sourceSets {
-        getByName("test").kotlin.srcDir("src/testShared/java")
-        getByName("androidTest").kotlin.srcDir("src/testShared/java")
+        val test by getting
+        val androidTest by getting
+
+        test.java.srcDir("src/testShared/java")
+        androidTest.java.srcDir("src/testShared/java")
     }
 }
 
